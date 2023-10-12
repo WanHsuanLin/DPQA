@@ -1,10 +1,11 @@
 from typing import Mapping, Sequence, Any
 import builtins
 builtins.Z3_LIB_DIRS = [ '/opt/spack/opt/spack/linux-ubuntu22.04-x86_64_v3/gcc-12.1.0/z3-4.11.2-hxnfucwb3fmte73gcyd3hnjnujnmhseh/lib/libz3.so' ] 
-from z3 import Int, Bool, sat, And, Implies, Solver, Not, Or, is_true, Then, With
+from z3 import Int, Bool, sat, And, Implies, Solver, Not, Or, is_true, Then, Optimize
 from networkx import max_weight_matching, Graph
 import time
 import json
+
 
 PYSAT_ENCODING = 2  # default choice: sequential counter
 
@@ -217,8 +218,7 @@ class DPQA:
         self.result_json['n_c'] = self.n_c
         self.result_json['n_r'] = self.n_r
         self.result_json['n_x'] = self.n_x
-        # self.result_json['n_y'] = self.n_y
-        self.result_json['n_y'] = 5
+        self.result_json['n_y'] = self.n_y
         self.result_json['row_per_site'] = self.row_per_site
         self.result_json['n_g'] = self.n_g
         self.result_json['g_q'] = self.g_q
@@ -470,15 +470,13 @@ class DPQA:
         y = [[Int(f"y_q{q}_t{t}") for t in range(num_stage)]
              for q in range(self.n_q)]
 
-        (self.dpqa) = Solver()
+        # (self.dpqa) = Solver()
         if self.cardenc == "z3atleast":
             (self.dpqa) = Then('simplify', 'solve-eqs',
                                'card2bv', 'bit-blast', 'aig', 'sat').solver()
         
         # test
-        # (self.dpqa) = Then(With('simplify', arith_lhs=True, som=True),
-        #  'normalize-bounds', 'lia2pb', 'pb2bv', 
-        #  'bit-blast', 'sat').solver()
+        (self.dpqa) = Optimize()
 
         self.constraint_all_aod(num_stage, a)
         self.constraint_no_transfer(num_stage, a)
@@ -693,45 +691,6 @@ class DPQA:
             self.constraint_gate_card_pysat(num_gate, num_stage, bound_gate, t)
         else:
             raise ValueError("cardinality method unknown")
-
-    ###### cardinality for atom tranfer
-    def constraint_atom_transfer_card_pysat(
-            self,
-            bound_atom_transfer: int,
-            step: int,
-            at: Sequence[Any],
-    ):
-        from pysat.card import CardEnc
-        numvar = step*self.n_q+1
-
-        ancillary = {}
-        # get the CNF encoding the cardinality constraint
-        cnf = CardEnc.atmost(
-            lits=range(1, numvar),
-            top_id=numvar-1,
-            bound=bound_atom_transfer,
-            encoding=PYSAT_ENCODING)
-        for conj in cnf:
-            or_list = []
-            for i in conj:
-                val = abs(i)
-                idx = val - 1
-                if i in range(1, numvar):
-                    or_list.append(at[idx // step][idx % step])
-                elif i in range(-numvar+1, 0):
-                    or_list.append(
-                        Not(at[idx // step][idx % step]))
-                else:
-                    if val not in ancillary.keys():
-                        ancillary[val] = Bool("anx_{}".format(val+self.ancillary_num))
-                        ######
-                        self.ancillary_num = max(val, self.ancillary_num)
-                    if i < 0:
-                        or_list.append(Not(ancillary[val]))
-                    else:
-                        or_list.append(ancillary[val])
-            (self.dpqa).add(Or(*or_list))
-
         
 
     def read_partial_solution(
@@ -756,7 +715,7 @@ class DPQA:
                 'id': q,
                 'a': 1 if is_true(model[a[q][s]]) else 0,
                 'x': model[x[q][s]].as_long(),
-                'y': model[y[q][s]].as_long() + 2,
+                'y': model[y[q][s]].as_long(),
                 'c': model[c[q][s]].as_long(),
                 'r': model[r[q][s]].as_long()})
             if is_true(model[a[q][s]]):
@@ -890,12 +849,10 @@ class DPQA:
             self,
             a: Sequence[Any],
     ):
-        at = [[Bool(f"at_q{q}_t{i}") for i in range(len(a[0])-1)]
-             for q in range(self.n_q)]
         for i in range(self.n_q):
-            for j in range(0, len(at[i])):
-                (self.dpqa).add(at[i][j] == (a[i][j] != a[i][j+1]))
-        return at
+            for j in range(0, len(a[0])-1):
+                (self.dpqa).add_soft((a[i][j] == a[i][j+1]))
+        return
 
     def hybrid_strategy(self):
         # default strategy for hybrid solving: if n_q <30, use optimal solving
@@ -947,13 +904,14 @@ class DPQA:
     def solve_optimal(self, step: int):
         t_s = time.time()
         bound_gate = len(self.g_q)
-        
-        
+
         a, c, r, x, y = self.solver_init(step+1)
+        self.dpqa.set("timeout", 22*3600)
         t = self.constraint_gate_batch(step+1, c, r, x, y)
         self.constraint_gate_card(bound_gate, step+1, t)
 
         solved_batch_gates = True if (self.dpqa).check() == sat else False
+
         while not solved_batch_gates:
             print(f"    no solution, step={step} too small")
             step += 1
@@ -972,30 +930,17 @@ class DPQA:
         self.result_json['duration_optimize_for_stage'] = str(time.time() - t_s)
         t_s = time.time()
         n_at = self.check_atom_transfer_count(a)
-        at = self.constraints_atom_transfer(a)
-        n_at -= 1
-        # minimize atom tranfer
-        reach_optimal_atom_transfer_count = (n_at == -1)
-        while not reach_optimal_atom_transfer_count:
-            self.dpqa.push()
-            self.constraint_atom_transfer_card_pysat(n_at, step, at)
-            reach_optimal_atom_transfer_count =\
-                False if (self.dpqa).check() == sat else True
-            if reach_optimal_atom_transfer_count:
-                n_at = self.check_atom_transfer_count(a)
-                n_rydberg = self.check_rydberg_count(t)
-                # todo
-                print(f"Find a solution with n_at={n_at} and n_rydberg={n_rydberg}")
-            self.dpqa.pop()
         
-        n_at += 1
-        self.constraint_atom_transfer_card_pysat(n_at, step, at)
+        self.constraints_atom_transfer(a)
         assert((self.dpqa).check() == sat)
+
+        n_at = self.check_atom_transfer_count(a)
         # add a card constraint for atom transfer
 
         self.result_json['duration_optimize_for_atom_transfer'] = str(time.time() - t_s)
-        # check number of rydberg laser invocation
         n_rydberg = self.check_rydberg_count(t)
+        print(f"Find a solution with n_at={n_at} and n_rydberg={n_rydberg}")
+        # check number of rydberg laser invocation
 
         self.result_json['n_rydberg'] = n_rydberg
         self.result_json['n_atom_transfer'] = n_at

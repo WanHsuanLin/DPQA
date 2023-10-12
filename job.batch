@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH -J my_job
+#SBATCH -o %x.%J.out
+#SBATCH -e %x.%J.err
+#SBATCH -t 10:00:00
+#SBATCH -N2 -n2
+#SBATCH --gpus=2
+#SBATCH --gres=fpga:u55c:2
+
+srun -p batch python3 -u try_opt.py &> m1_opt_d6.out
+srun -p batch python3 -u try.py &> m1_d6.out
