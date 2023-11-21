@@ -1,0 +1,43 @@
+final 100.0 percent
+(:arith-assert-lower        247694328
+ :arith-assert-upper        247134915
+ :arith-bound-prop          4362693
+ :arith-conflicts           32012
+ :arith-num-rows            6474
+ :arith-pivots              19633095
+ :arith-row-summations      3052161540
+ :arith-tableau-max-columns 7098
+ :arith-tableau-max-rows    6474
+ :binary-propagations       1586734432
+ :conflicts                 6047382
+ :decisions                 8530128
+ :del-clause                10137129
+ :eliminated-applications   40
+ :eliminated-vars           128
+ :final-checks              1
+ :max-memory                228.50
+ :memory                    115.42
+ :minimized-lits            80220231
+ :mk-bool-var               30086
+ :mk-clause                 10371009
+ :mk-clause-binary          32175
+ :num-allocs                37020551502.00
+ :num-checks                1
+ :propagations              1776929
+ :restarts                  2242
+ :rlimit-count              145371595403.00
+ :time                      2555.27)
+srun: interrupt (one more within 1 sec to abort)
+srun: StepId=454.0 task 0: running
+srun: sending Ctrl-C to StepId=454.0
+srun: forcing job termination
+Traceback (most recent call last):
+  File "/home/wanhsuan/DPQA/try.py", line 102, in <module>
+    #         [1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+  File "/home/wanhsuan/DPQA/solve_atom_transfer.py", line 1015, in solve
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+    self.solve_optimal(step)
+  File "/home/wanhsuan/DPQA/solve_atom_transfer.py", line 993, in solve_optimal
+    assert((self.dpqa).check() == sat)
+AssertionError
+slurmstepd-c00: error: *** STEP 454.0 ON c00 CANCELLED AT 2023-10-12T15:23:19 ***

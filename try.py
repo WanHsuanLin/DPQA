@@ -2,7 +2,7 @@ from animation import CodeGen
 from solve_atom_transfer import DPQA
 # from solve_atom_transfer_soft_constraints import DPQA
 
-name = 'no_transfer_m1'
+
 # code = [
 #     [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
 #     [1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -23,16 +23,70 @@ name = 'no_transfer_m1'
 #     [1,0,0,0,0,0,0,0,0,1,1,0],
 #     [0,1,0,1,0,1,0,0,0,0,0,0]]
 
+code_set = [
+    #new matrix one
+    [[0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0], 
+    [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
+    [1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
+    [1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1]],
+    #new matrix two
+    [[0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1],
+    [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+    [0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1],
+    [1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0]],
+    #new matrix three
+    [[0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0],
+    [1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0],
+    [1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
+    [0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0],
+    [0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1]],
+    #new matrix four
+    [[0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0],
+    [0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
+    [1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0],
+    [0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1],
+    [0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0],
+    [0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0]],
+    #new matrix five
+    [[0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0],
+    [1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+    [0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0],
+    [0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 1],
+    [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0],
+    [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0]]
+]
+
+
 #new matrix one
-code = [[0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0], 
-        [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
-        [1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
-        [0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
-        [1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0],
-        [0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0],
-        [0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1]] 
+# code = [[0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0], 
+#         [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1],
+#         [1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+#         [0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0],
+#         [1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0],
+#         [0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0],
+#         [0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+#         [0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0],
+#         [0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1]] 
 # #new matrix two
 # code = [[0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1],
 #         [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0],
@@ -74,31 +128,37 @@ code = [[0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0],
 #         [0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1],
 #         [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0]]
 
-n_data_q = len(code[0])
-n_meas_q = len(code)
-n_q = n_data_q + n_meas_q
+# step = 6
+for step in [5]:
+    for i in [0]: # range(1,len(code_set)):
+        print("compiling m{}_d{}".format(i, step))
+        name = 'no_transfer_m{}_d{}'.format(i, step)
+        code = code_set[i]
+        n_data_q = len(code[0])
+        n_meas_q = len(code)
+        n_q = n_data_q + n_meas_q
 
-# construct graph for CNOTs
-cnots = []
-for meas_q in range(n_meas_q):
-    for data_q, bit in enumerate(code[meas_q]):
-        if bit == 1:
-            cnots.append((data_q, n_data_q + meas_q))
+        # construct graph for CNOTs
+        cnots = []
+        for meas_q in range(n_meas_q):
+            for data_q, bit in enumerate(code[meas_q]):
+                if bit == 1:
+                    cnots.append((data_q, n_data_q + meas_q))
 
 
-compiler = DPQA(name, dir='./results/smt/', print_detail=True)
+        compiler = DPQA(name, dir='./results/smt/', print_detail=True)
 
-# have one row and n_q columns of SLM and AOD
-compiler.setArchitecture([n_q+5, 1, n_q+5, 1])
+        # have one row and n_q columns of SLM and AOD
+        compiler.setArchitecture([n_q+5, 1, n_q+5, 1])
 
-compiler.setProgram(cnots)
+        compiler.setProgram(cnots)
 
-# optimization flags that work in this case
-compiler.setPureGraph()
-compiler.setNoTransfer()
-compiler.setCommutation()
-compiler.setOptimalRatio(1.0)
+        # optimization flags that work in this case
+        compiler.setPureGraph()
+        # compiler.setNoTransfer()
+        compiler.setCommutation()
+        compiler.setOptimalRatio(1.0)
 
-compiler.solve()
+        compiler.solve(step)
 
-codegen = CodeGen(f'./results/smt/{name}.json', dir='./results/code/')
+        codegen = CodeGen(f'./results/smt/{name}.json', dir='./results/code/')

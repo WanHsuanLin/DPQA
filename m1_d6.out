@@ -1,0 +1,221 @@
+final 100.0 percent
+(:arith-assert-lower        247694328
+ :arith-assert-upper        247134915
+ :arith-bound-prop          4362693
+ :arith-conflicts           32012
+ :arith-num-rows            6474
+ :arith-pivots              19633095
+ :arith-row-summations      3052161540
+ :arith-tableau-max-columns 7098
+ :arith-tableau-max-rows    6474
+ :binary-propagations       1586734432
+ :conflicts                 6047382
+ :decisions                 8530128
+ :del-clause                10137129
+ :eliminated-applications   40
+ :eliminated-vars           128
+ :final-checks              1
+ :max-memory                228.50
+ :memory                    115.42
+ :minimized-lits            80220231
+ :mk-bool-var               30086
+ :mk-clause                 10371009
+ :mk-clause-binary          32175
+ :num-allocs                37020551502.00
+ :num-checks                1
+ :propagations              1776929
+ :restarts                  2242
+ :rlimit-count              145371595403.00
+ :time                      2496.53)
+    found solution with 36 gates in 6 step
+        stage -1:
+        q_0 is at (4, 0) SLM c_23, r_0
+        q_1 is at (27, -1) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_0, r_0
+        q_3 is at (21, 0) SLM c_4, r_0
+        q_4 is at (10, 0) SLM c_3, r_0
+        q_5 is at (15, -1) AOD c_3, r_0
+        q_6 is at (24, -1) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_7, r_0
+        q_8 is at (18, 0) SLM c_7, r_0
+        q_9 is at (6, 0) SLM c_2, r_0
+        q_10 is at (9, 0) SLM c_11, r_0
+        q_11 is at (19, -1) AOD c_8, r_0
+        q_12 is at (28, -1) AOD c_22, r_0
+        q_13 is at (17, -1) AOD c_6, r_0
+        q_14 is at (16, -1) AOD c_4, r_0
+        q_15 is at (26, -1) AOD c_18, r_0
+        q_16 is at (23, -1) AOD c_13, r_0
+        q_17 is at (25, -1) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_5, r_0
+        q_19 is at (3, -1) AOD c_1, r_0
+        q_20 is at (20, -1) AOD c_10, r_0
+        stage 0:
+        q_0 is at (4, 0) SLM c_9, r_0
+        q_1 is at (24, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_7, r_0
+        q_3 is at (21, 0) SLM c_24, r_0
+        q_4 is at (10, 0) SLM c_25, r_0
+        q_5 is at (16, 0) AOD c_3, r_0
+        q_6 is at (23, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_8, r_0
+        q_8 is at (18, 0) SLM c_9, r_0
+        q_9 is at (6, 0) SLM c_0, r_0
+        q_10 is at (9, 0) SLM c_12, r_0
+        q_11 is at (20, 0) AOD c_8, r_0
+        q_12 is at (25, 0) AOD c_22, r_0
+        q_13 is at (19, 0) AOD c_6, r_0
+        q_14 is at (18, 0) AOD c_4, r_0
+        q_15 is at (24, 0) AOD c_18, r_0
+        q_16 is at (22, 0) AOD c_13, r_0
+        q_17 is at (23, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_23, r_0
+        q_19 is at (14, 0) AOD c_1, r_0
+        q_20 is at (21, 0) AOD c_10, r_0
+        CZ(q_8, q_14)
+        CZ(q_1, q_15)
+        CZ(q_6, q_17)
+        CZ(q_7, q_19)
+        CZ(q_3, q_20)
+        stage 1:
+        q_0 is at (4, 0) SLM c_0, r_0
+        q_1 is at (17, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_23, r_0
+        q_3 is at (21, 0) SLM c_25, r_0
+        q_4 is at (10, 0) SLM c_24, r_0
+        q_5 is at (2, 0) AOD c_3, r_0
+        q_6 is at (12, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_0, r_0
+        q_8 is at (18, 0) SLM c_0, r_0
+        q_9 is at (6, 0) SLM c_12, r_0
+        q_10 is at (9, 0) SLM c_21, r_0
+        q_11 is at (7, 0) AOD c_8, r_0
+        q_12 is at (20, 0) AOD c_22, r_0
+        q_13 is at (5, 0) AOD c_6, r_0
+        q_14 is at (4, 0) AOD c_4, r_0
+        q_15 is at (15, 0) AOD c_18, r_0
+        q_16 is at (10, 0) AOD c_13, r_0
+        q_17 is at (13, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_11, r_0
+        q_19 is at (1, 0) AOD c_1, r_0
+        q_20 is at (8, 0) AOD c_10, r_0
+        CZ(q_0, q_14)
+        CZ(q_4, q_16)
+        CZ(q_2, q_17)
+        CZ(q_6, q_18)
+        stage 2:
+        q_0 is at (4, 0) SLM c_9, r_0
+        q_1 is at (11, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_17, r_0
+        q_3 is at (21, 0) SLM c_24, r_0
+        q_4 is at (10, 0) SLM c_23, r_0
+        q_5 is at (0, 0) AOD c_3, r_0
+        q_6 is at (5, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_12, r_0
+        q_8 is at (18, 0) SLM c_19, r_0
+        q_9 is at (6, 0) SLM c_17, r_0
+        q_10 is at (9, 0) SLM c_22, r_0
+        q_11 is at (2, 0) AOD c_8, r_0
+        q_12 is at (13, 0) AOD c_22, r_0
+        q_13 is at (2, 0) AOD c_6, r_0
+        q_14 is at (1, 0) AOD c_4, r_0
+        q_15 is at (9, 0) AOD c_18, r_0
+        q_16 is at (4, 0) AOD c_13, r_0
+        q_17 is at (6, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_7, r_0
+        q_19 is at (0, 0) AOD c_1, r_0
+        q_20 is at (3, 0) AOD c_10, r_0
+        CZ(q_2, q_12)
+        CZ(q_11, q_13)
+        CZ(q_10, q_15)
+        CZ(q_0, q_16)
+        CZ(q_9, q_17)
+        CZ(q_5, q_19)
+        stage 3:
+        q_0 is at (4, 0) SLM c_15, r_0
+        q_1 is at (25, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_21, r_0
+        q_3 is at (21, 0) SLM c_25, r_0
+        q_4 is at (10, 0) SLM c_19, r_0
+        q_5 is at (7, 0) AOD c_3, r_0
+        q_6 is at (22, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_14, r_0
+        q_8 is at (18, 0) SLM c_0, r_0
+        q_9 is at (6, 0) SLM c_23, r_0
+        q_10 is at (9, 0) SLM c_12, r_0
+        q_11 is at (12, 0) AOD c_8, r_0
+        q_12 is at (25, 0) AOD c_22, r_0
+        q_13 is at (9, 0) AOD c_6, r_0
+        q_14 is at (8, 0) AOD c_4, r_0
+        q_15 is at (24, 0) AOD c_18, r_0
+        q_16 is at (21, 0) AOD c_13, r_0
+        q_17 is at (23, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_2, r_0
+        q_19 is at (6, 0) AOD c_1, r_0
+        q_20 is at (18, 0) AOD c_10, r_0
+        CZ(q_1, q_12)
+        CZ(q_10, q_13)
+        CZ(q_3, q_16)
+        CZ(q_11, q_18)
+        CZ(q_9, q_19)
+        CZ(q_8, q_20)
+        stage 4:
+        q_0 is at (4, 0) SLM c_19, r_0
+        q_1 is at (12, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_23, r_0
+        q_3 is at (21, 0) SLM c_2, r_0
+        q_4 is at (10, 0) SLM c_17, r_0
+        q_5 is at (1, 0) AOD c_3, r_0
+        q_6 is at (8, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_0, r_0
+        q_8 is at (18, 0) SLM c_5, r_0
+        q_9 is at (6, 0) SLM c_12, r_0
+        q_10 is at (9, 0) SLM c_24, r_0
+        q_11 is at (5, 0) AOD c_8, r_0
+        q_12 is at (14, 0) AOD c_22, r_0
+        q_13 is at (4, 0) AOD c_6, r_0
+        q_14 is at (1, 0) AOD c_4, r_0
+        q_15 is at (10, 0) AOD c_18, r_0
+        q_16 is at (7, 0) AOD c_13, r_0
+        q_17 is at (9, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_14, r_0
+        q_19 is at (0, 0) AOD c_1, r_0
+        q_20 is at (6, 0) AOD c_10, r_0
+        CZ(q_7, q_12)
+        CZ(q_0, q_13)
+        CZ(q_5, q_14)
+        CZ(q_4, q_15)
+        CZ(q_10, q_17)
+        CZ(q_1, q_18)
+        CZ(q_9, q_20)
+        stage 5:
+        q_0 is at (4, 0) SLM c_25, r_0
+        q_1 is at (20, 0) AOD c_20, r_0
+        q_2 is at (13, 0) SLM c_24, r_0
+        q_3 is at (21, 0) SLM c_21, r_0
+        q_4 is at (10, 0) SLM c_14, r_0
+        q_5 is at (12, 0) AOD c_3, r_0
+        q_6 is at (16, 0) AOD c_15, r_0
+        q_7 is at (14, 0) SLM c_19, r_0
+        q_8 is at (18, 0) SLM c_17, r_0
+        q_9 is at (6, 0) SLM c_20, r_0
+        q_10 is at (9, 0) SLM c_12, r_0
+        q_11 is at (15, 0) AOD c_8, r_0
+        q_12 is at (21, 0) AOD c_22, r_0
+        q_13 is at (14, 0) AOD c_6, r_0
+        q_14 is at (13, 0) AOD c_4, r_0
+        q_15 is at (18, 0) AOD c_18, r_0
+        q_16 is at (16, 0) AOD c_13, r_0
+        q_17 is at (17, 0) AOD c_16, r_0
+        q_18 is at (12, 0) SLM c_11, r_0
+        q_19 is at (10, 0) AOD c_1, r_0
+        q_20 is at (15, 0) AOD c_10, r_0
+        CZ(q_3, q_12)
+        CZ(q_7, q_13)
+        CZ(q_2, q_14)
+        CZ(q_8, q_15)
+        CZ(q_6, q_16)
+        CZ(q_5, q_18)
+        CZ(q_4, q_19)
+        CZ(q_11, q_20)
+runtime 6181.744520902634

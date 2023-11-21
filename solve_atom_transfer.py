@@ -954,6 +954,7 @@ class DPQA:
         self.constraint_gate_card(bound_gate, step+1, t)
 
         solved_batch_gates = True if (self.dpqa).check() == sat else False
+        print(solve_batch_gates)
         while not solved_batch_gates:
             print(f"    no solution, step={step} too small")
             step += 1
@@ -1003,11 +1004,11 @@ class DPQA:
         print(f"    found solution with {bound_gate} gates in {step} step")
         self.process_partial_solution(step+1, a, c, r, x, y, t)
 
-    def solve(self):
+    def solve(self, step = 1):
 
         self.writeSettingJson()
         t_s = time.time()
-        step = 6  # compile for 1 step, or 2 stages each time
+        # step = 6  # compile for 1 step, or 2 stages each time
         total_g_q = len(self.g_q)
         self.solve_greedy(step)
         if len(self.g_q) > 0:
